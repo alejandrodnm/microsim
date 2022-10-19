@@ -30,7 +30,7 @@ func Get(ctx context.Context, url string, tracer opentracing.Tracer) error {
 	defer span.Finish()
 
 	carrier := opentracing.HTTPHeadersCarrier(req.Header)
-	tracer.Inject(span.Context(), opentracing.HTTPHeaders, carrier)
+	_ = tracer.Inject(span.Context(), opentracing.HTTPHeaders, carrier)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
